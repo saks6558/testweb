@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services & Support - Megger Thailand</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo">
+                <i class="fas fa-bolt" style="color:var(--primary-color)"></i> MEGGER <span>THAILAND</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html">หน้าแรก</a>
+                <a href="products.html">สินค้า</a>
+                <a href="services.html" class="active">บริการ</a>
+                <a href="about.html">เกี่ยวกับเรา</a>
+                <a href="contact.html">ติดต่อเรา</a>
+            </nav>
+            <div class="header-actions">
+                <a href="tel:02-123-4567" class="btn btn-outline"><i class="fas fa-phone"></i> 02-123-4567</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Service Tracker Section -->
+    <section class="section-padding text-center"
+        style="background: linear-gradient(135deg, var(--secondary-color), #333); color: white;">
+        <div class="container">
+            <i class="fas fa-tools fa-3x mb-3" style="opacity:0.8;"></i>
+            <h1 style="color:white; margin-bottom:1rem;">Service & Calibration Center</h1>
+            <p style="color:rgba(255,255,255,0.8); font-size:1.2rem; margin-bottom:3rem;">
+                ศูนย์บริการมาตรฐานสากล พร้อมเครื่องมือสอบเทียบ (Calibration) ที่แม่นยำที่สุด
+            </p>
+
+            <div class="card"
+                style="background: rgba(255, 255, 255, 0.1); border:1px solid rgba(255,255,255,0.2); backdrop-filter: blur(10px); color: white; padding: 3rem; max-width: 600px; margin: 0 auto;">
+                <h3 style="color:white; margin-bottom:1.5rem;">Check Repair Status</h3>
+                <form onsubmit="event.preventDefault(); alert('ระบบกำลังเชื่อมต่อฐานข้อมูล... (Demo Only)');">
+                    <div class="d-flex gap-sm">
+                        <input type="text" class="form-control"
+                            placeholder="เลขที่ใบรับซ่อม (Job ID e.g., REP-2024-001)"
+                            style="border-color: rgba(255,255,255,0.3); background: rgba(0,0,0,0.2); color: white;">
+                        <button type="submit" class="btn btn-primary">Track</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Request Form -->
+    <section class="container section-padding">
+        <div class="section-header">
+            <h2>ส่งเครื่องซ่อม / สอบเทียบ</h2>
+            <p>กรอกข้อมูลเบื้องต้นเพื่อให้เจ้าหน้าที่ติดต่อกลับ</p>
+        </div>
+
+        <!-- Steps (Simplified visuals using utility classes) -->
+        <div class="d-flex justify-center mb-4 gap-md" style="opacity: 0.8;">
+            <div class="d-flex align-center gap-sm" style="font-weight: 700; color: var(--primary-color);">
+                <div
+                    style="width: 30px; height: 30px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    1</div>
+                ข้อมูลลูกค้า
+            </div>
+            <div class="d-flex align-center gap-sm" style="opacity: 0.5;">
+                <div
+                    style="width: 30px; height: 30px; background: #ddd; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    2</div>
+                ข้อมูลอุปกรณ์
+            </div>
+            <div class="d-flex align-center gap-sm" style="opacity: 0.5;">
+                <div
+                    style="width: 30px; height: 30px; background: #ddd; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    3</div>
+                อาการเสีย
+            </div>
+        </div>
+
+        <form class="card" style="padding: 3rem; max-width: 800px; margin: 0 auto;">
+            <h3 class="mb-3" style="color:var(--primary-color);">Step 1: ข้อมูลผู้ติดต่อ</h3>
+            <div class="d-flex gap-md mb-2" style="flex-wrap: wrap;">
+                <div class="form-group w-100" style="flex:1;">
+                    <label>ชื่อ-นามสกุล</label>
+                    <input type="text" class="form-control" required>
+                </div>
+                <div class="form-group w-100" style="flex:1;">
+                    <label>บริษัท</label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="d-flex gap-md" style="flex-wrap: wrap;">
+                <div class="form-group w-100" style="flex:1;">
+                    <label>เบอร์โทรศัพท์</label>
+                    <input type="tel" class="form-control" required>
+                </div>
+                <div class="form-group w-100" style="flex:1;">
+                    <label>อีเมล</label>
+                    <input type="email" class="form-control">
+                </div>
+            </div>
+
+            <div class="mt-4" style="border-top:1px solid #eee; padding-top:2rem;">
+                <h3 class="mb-3" style="color:var(--primary-color);">Step 2: ข้อมูลเครื่องมือ</h3>
+                <div class="d-flex gap-md" style="flex-wrap: wrap;">
+                    <div class="form-group w-100" style="flex:1;">
+                        <label>รุ่นเครื่องมือ (Model)</label>
+                        <input type="text" class="form-control" placeholder="เช่น MIT515, DLRO10">
+                    </div>
+                    <div class="form-group w-100" style="flex:1;">
+                        <label>หมายเลขเครื่อง (Serial Number)</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4" style="border-top:1px solid #eee; padding-top:2rem;">
+                <h3 class="mb-3" style="color:var(--primary-color);">Step 3: บริการที่ต้องการ</h3>
+                <div class="form-group">
+                    <label>ประเภทบริการ</label>
+                    <select class="form-control">
+                        <option>แจ้งซ่อม (Repair)</option>
+                        <option>สอบเทียบ (Calibration)</option>
+                        <option>เช่าเครื่อง (Rental)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>รายละเอียดอาการเสีย / เพิ่มเติม</label>
+                    <textarea class="form-control" rows="4"></textarea>
+                </div>
+            </div>
+
+            <div class="mt-4 text-right">
+                <button type="button" class="btn btn-primary"
+                    onclick="alert('ขอบคุณ! เราได้รับข้อมูลแจ้งซ่อมเรียบร้อยแล้ว เจ้าหน้าที่จะติดต่อกลับภายใน 24 ชม.')">
+                    ส่งข้อมูลแจ้งซ่อม
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h4>Megger Thailand</h4>
+                <p>ผู้นำด้านเครื่องมือวัดและทดสอบไฟฟ้าแรงสูงครบวงจร</p>
+            </div>
+            <div class="footer-col">
+                <h4>สินค้า</h4>
+                <ul>
+                    <li><a href="#">Cable Fault Locators</a></li>
+                    <li><a href="#">Circuit Breaker Test</a></li>
+                    <li><a href="#">Insulation Testers</a></li>
+                    <li><a href="#">Low Resistance Ohmmeters</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>บริการลูกค้า</h4>
+                <ul>
+                    <li><a href="#">แจ้งซ่อมสินค้า</a></li>
+                    <li><a href="#">ดาวน์โหลด Software</a></li>
+                    <li><a href="#">ตารางอบรมสัมมนา</a></li>
+                    <li><a href="#">ติดต่อเรา</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>ติดต่อสอบถาม</h4>
+                <p style="color:#999; font-size:0.9rem;">
+                    <i class="fas fa-map-marker-alt"></i> 123 อาคารตัวอย่าง กรุงเทพฯ<br>
+                    <i class="fas fa-phone"></i> 02-123-4567<br>
+                    <i class="fas fa-envelope"></i> sales@megger.co.th
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Megger Thailand</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+        }
+
+        @media (max-width: 900px) {
+            .contact-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .contact-info-card {
+            background: var(--secondary-color);
+            color: white;
+            padding: 2.5rem;
+            border-radius: var(--radius-md);
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo">
+                <i class="fas fa-bolt" style="color:var(--primary-color)"></i> MEGGER <span>THAILAND</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html">หน้าแรก</a>
+                <a href="products.html">สินค้า</a>
+                <a href="services.html">บริการ</a>
+                <a href="about.html">เกี่ยวกับเรา</a>
+                <a href="contact.html" class="active">ติดต่อเรา</a>
+            </nav>
+            <div class="header-actions">
+                <a href="tel:02-123-4567" class="btn btn-outline"><i class="fas fa-phone"></i> 02-123-4567</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" style="padding-top:4rem; margin-bottom: 2rem;">
+        <h1 class="mb-2">ติดต่อเรา</h1>
+        <p>ทีมงานผู้เชี่ยวชาญของเราพร้อมให้คำปรึกษาตลอดเวลาทำการ</p>
+    </div>
+
+    <section class="container contact-layout section-padding" style="padding-top: 0;">
+        <!-- Contact Info -->
+        <div>
+            <div class="contact-info-card">
+                <h3 class="mb-4" style="color:white;">Office HQ</h3>
+
+                <div class="d-flex gap-sm mb-4">
+                    <i class="fas fa-map-marker-alt"
+                        style="color:var(--primary-color); font-size:1.5rem; margin-top:5px;"></i>
+                    <div>
+                        <h4 style="color:white; margin-bottom:0.5rem;">Address</h4>
+                        <p style="color:#aaa; line-height:1.6;">
+                            123 อาคารตัวอย่าง ชั้น 15<br>
+                            เขตบางรัก กรุงเทพฯ 10500
+                        </p>
+                    </div>
+                </div>
+
+                <div class="d-flex gap-sm mb-4">
+                    <i class="fas fa-phone" style="color:var(--primary-color); font-size:1.5rem; margin-top:5px;"></i>
+                    <div>
+                        <h4 style="color:white; margin-bottom:0.5rem;">Phone</h4>
+                        <p style="color:#aaa;">02-123-4567 (Auto)<br>081-999-9999 (Hotline 24/7)</p>
+                    </div>
+                </div>
+
+                <div class="d-flex gap-sm mb-4">
+                    <i class="fas fa-envelope"
+                        style="color:var(--primary-color); font-size:1.5rem; margin-top:5px;"></i>
+                    <div>
+                        <h4 style="color:white; margin-bottom:0.5rem;">Email</h4>
+                        <p style="color:#aaa;">sales@megger.co.th<br>support@megger.co.th</p>
+                    </div>
+                </div>
+
+                <div class="d-flex gap-sm">
+                    <i class="fas fa-clock" style="color:var(--primary-color); font-size:1.5rem; margin-top:5px;"></i>
+                    <div>
+                        <h4 style="color:white; margin-bottom:0.5rem;">Business Hours</h4>
+                        <p style="color:#aaa;">จันทร์ - ศุกร์: 08:30 - 17:30</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="card" style="padding: 2.5rem;">
+            <h3 class="mb-4">ส่งข้อความถึงเรา</h3>
+            <form>
+                <div class="form-group">
+                    <label>หัวข้อติดต่อ</label>
+                    <select class="form-control">
+                        <option>ฝ่ายขาย (Sales)</option>
+                        <option>ฝ่ายบริการเทคนิค (Technical Support)</option>
+                        <option>ต้องการตัวแทนจำหน่าย (Distributor)</option>
+                    </select>
+                </div>
+                <div class="d-flex gap-md mb-2" style="flex-wrap: wrap;">
+                    <div class="form-group" style="flex:1; min-width: 200px;">
+                        <label>ชื่อ-นามสกุล</label>
+                        <input type="text" class="form-control" placeholder="ชื่อของคุณ">
+                    </div>
+                    <div class="form-group" style="flex:1; min-width: 200px;">
+                        <label>เบอร์โทร</label>
+                        <input type="tel" class="form-control" placeholder="เบอร์ติดต่อกลับ">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>อีเมล</label>
+                    <input type="email" class="form-control" placeholder="example@company.com">
+                </div>
+                <div class="form-group">
+                    <label>ข้อความ</label>
+                    <textarea class="form-control" rows="5" placeholder="รายละเอียดที่ต้องการสอบถาม..."></textarea>
+                </div>
+                <button type="button" class="btn btn-primary w-100"
+                    onclick="alert('ส่งข้อความเรียบร้อย! เจ้าหน้าที่จะติดต่อกลับโดยเร็วที่สุด')">
+                    ส่งข้อความ
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="container mb-4">
+        <h3 class="mb-3">แผนที่เดินทาง</h3>
+        <div
+            style="width: 100%; height: 400px; background: #eee; border-radius: var(--radius-md); overflow: hidden; display: flex; align-items: center; justify-content: center; color: #888;">
+            <!-- Google Maps Placeholder -->
+            <div class="text-center">
+                <i class="fas fa-map-marked-alt fa-3x mb-2" style="color:#ccc;"></i>
+                <p>Google Maps Integration Here</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h4>Megger Thailand</h4>
+                <p style="color:rgba(255,255,255,0.7)">ผู้นำด้านเครื่องมือวัดและทดสอบไฟฟ้าแรงสูงครบวงจร</p>
+            </div>
+            <div class="footer-col">
+                <h4>เมนูลัด</h4>
+                <ul>
+                    <li><a href="about.html">เกี่ยวกับเรา</a></li>
+                    <li><a href="contact.html">ติดต่อเรา</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>บริการลูกค้า</h4>
+                <ul>
+                    <li><a href="#">แจ้งซ่อมสินค้า</a></li>
+                    <li><a href="#">ดาวน์โหลด Software</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>ติดต่อสอบถาม</h4>
+                <p style="color:#999; font-size:0.9rem;">
+                    <i class="fas fa-map-marker-alt"></i> 123 อาคารตัวอย่าง กรุงเทพฯ<br>
+                    <i class="fas fa-phone"></i> 02-123-4567<br>
+                    <i class="fas fa-envelope"></i> sales@megger.co.th
+                </p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

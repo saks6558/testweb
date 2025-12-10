@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Megger Thailand</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo">
+                <i class="fas fa-bolt" style="color:var(--primary-color)"></i> MEGGER <span>ADMIN</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html" style="color:var(--text-muted)">
+                    <i class="fas fa-arrow-left"></i> กลับหน้าหลัก
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container admin-layout">
+
+        <!-- File Protocol Warning -->
+        <div id="protocolWarning" class="status-warning mb-4"
+            style="grid-column: 1/-1; display:none; padding:1.5rem; text-align:center;">
+            <i class="fas fa-exclamation-triangle fa-2x mb-2"></i><br>
+            <strong>Warning: You are opening this file directly!</strong>
+            <p style="margin-top:0.5rem; color:inherit;">The Admin Panel requires a backend server to work.</p>
+            <p style="color:inherit;">Please open: <a href="http://localhost:3000/admin.html"
+                    style="text-decoration:underline;">http://localhost:3000/admin.html</a></p>
+        </div>
+
+        <script>
+            if (window.location.protocol === 'file:') {
+                document.getElementById('protocolWarning').style.display = 'block';
+                // Disable forms
+                /* 
+                const forms = document.querySelectorAll('form');
+                forms.forEach(f => {
+                    f.style.opacity = '0.5';
+                    f.style.pointerEvents = 'none';
+                });
+                */
+            }
+        </script>
+
+        <!-- Sidebar / Add Form -->
+        <aside class="card" style="padding: 2rem;">
+            <h2 class="h3 mb-3 d-flex align-center gap-sm">
+                <i class="fas fa-plus-circle" style="color:var(--primary-color)"></i> เพิ่มสินค้าใหม่
+            </h2>
+
+            <form id="addProductForm">
+                <div class="form-group">
+                    <label>ชื่อสินค้า</label>
+                    <input type="text" name="name" class="form-control" required placeholder="Ex. MIT515 Analysis">
+                </div>
+
+                <div class="form-group">
+                    <label>หมวดหมู่</label>
+                    <select name="category" class="form-control" required>
+                        <option value="">เลือกหมวดหมู่...</option>
+                        <option value="Insulation Testing">Insulation Testing</option>
+                        <option value="Cable Fault">Cable Fault Locators</option>
+                        <option value="Circuit Breaker">Circuit Breaker Test</option>
+                        <option value="Relay Protection">Relay Protection</option>
+                        <option value="Transformer Testing">Transformer Testing</option>
+                        <option value="Low Resistance">Low Resistance Ohmmeters</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>รายละเอียด</label>
+                    <textarea name="description" class="form-control" rows="3"
+                        placeholder="คุณสมบัติเด่น..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>รูปภาพสินค้า</label>
+                    <div
+                        style="border: 2px dashed var(--border-subtle); padding: 1rem; text-align: center; border-radius: var(--radius-sm);">
+                        <input type="file" name="image" accept="image/*" style="width: 100%;">
+                        <small class="d-block mt-1 text-muted">รองรับ JPG, PNG (Max 2MB)</small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Datasheet (PDF)</label>
+                    <div
+                        style="border: 2px dashed var(--border-subtle); padding: 1rem; text-align: center; border-radius: var(--radius-sm); background:var(--bg-body);">
+                        <input type="file" name="datasheet" accept="application/pdf" style="width: 100%;">
+                        <small class="d-block mt-1 text-muted">ไฟล์ PDF เท่านั้น</small>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-save"></i> บันทึกข้อมูล
+                </button>
+            </form>
+        </aside>
+
+        <!-- Main Content / Table -->
+        <main>
+            <div class="d-flex justify-between align-center mb-3">
+                <h2>Inventory Management</h2>
+                <div style="color:var(--text-muted); font-size:0.9rem;">
+                    <i class="fas fa-box"></i> <span id="productCount">0</span> รายการ
+                </div>
+            </div>
+
+            <div class="product-table-wrapper">
+                <table class="product-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 80px;">รูปภาพ</th>
+                            <th>ข้อมูลสินค้า</th>
+                            <th>หมวดหมู่</th>
+                            <th>สถานะ</th>
+                            <th style="text-align:right">จัดการ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productTableBody">
+                        <!-- Loading State -->
+                        <tr>
+                            <td colspan="5" style="text-align:center; padding:3rem; color:var(--text-muted);">
+                                <i class="fas fa-spinner fa-spin"></i> กำลังโหลดข้อมูล...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        const API_URL = '/api/products';
+
+        async function loadProducts() {
+            try {
+                const res = await fetch(API_URL);
+                const products = await res.json();
+                const tbody = document.getElementById('productTableBody');
+                const countSpan = document.getElementById('productCount');
+
+                tbody.innerHTML = '';
+                countSpan.textContent = products.length;
+
+                if (products.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="5" style="text-align:center; padding:3rem;">
+                                <i class="fas fa-box-open fa-2x" style="color:#ddd; margin-bottom:1rem;"></i>
+                                <p style="color:#999">ยังไม่มีสินค้าในระบบ</p>
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                products.forEach(p => {
+                    const tr = document.createElement('tr');
+                    // Check if image is URL or Upload path
+                    const imgSrc = (p.image?.startsWith('http') || p.image?.startsWith('uploads/')) ? p.image : 'uploads/' + p.image;
+
+                    tr.innerHTML = `
+                        <td>
+                             <div class="product-thumbnail">
+                                ${p.image?.startsWith('http') || p.image?.startsWith('uploads')
+                            ? `<img src="${p.image}" style="width:100%; height:100%; object-fit:cover;">`
+                            : `<i class="fas fa-bolt" style="color:#ddd"></i>`
+                        }
+                             </div>
+                        </td>
+                        <td>
+                            <div style="font-weight:600; color:var(--secondary-color);">${p.name}</div>
+                            <small style="color:var(--text-muted); display:block; margin-bottom:0.25rem;">${p.description ? p.description.substring(0, 40) + '...' : '-'}</small>
+                            ${p.datasheet ? '<span style="font-size:0.75rem; color:#d32f2f; background:#ffebee; padding:2px 6px; border-radius:4px;"><i class="fas fa-file-pdf"></i> PDF</span>' : ''}
+                        </td>
+                        <td>${p.category}</td>
+                        <td><span class="status-badge status-success">In Stock</span></td>
+                        <td style="text-align:right">
+                            <button class="btn btn-sm btn-danger" onclick="deleteProduct(${p.id})">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch (err) {
+                console.error(err);
+                // Fallback for UI testing
+                if (window.location.protocol === 'file:') return;
+            }
+        }
+
+        document.getElementById('addProductForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> กำลังบันทึก...';
+            btn.disabled = true;
+
+            const formData = new FormData(e.target);
+
+            try {
+                const res = await fetch(API_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (res.ok) {
+                    e.target.reset();
+                    loadProducts();
+                } else {
+                    alert('Error adding product');
+                }
+            } catch (err) {
+                console.error(err);
+                if (window.location.protocol === 'file:') {
+                    alert('Error: You are running this file directly. Please use http://localhost:3000');
+                } else {
+                    alert('Connection failed. Please check if the server is running (npm run start).');
+                }
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        });
+
+        async function deleteProduct(id) {
+            if (!confirm('ต้องการลบสินค้านี้ใช่หรือไม่?')) return;
+
+            try {
+                const res = await fetch(`${API_URL}/${id}`, {
+                    method: 'DELETE'
+                });
+                if (res.ok) loadProducts();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        loadProducts();
+    </script>
+</body>
+
+</html>

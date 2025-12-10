@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Megger Thailand</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .about-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .year-badge {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            font-weight: bold;
+            border-radius: var(--radius-sm);
+            min-width: 80px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo">
+                <i class="fas fa-bolt" style="color:var(--primary-color)"></i> MEGGER <span>THAILAND</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html">หน้าแรก</a>
+                <a href="products.html">สินค้า</a>
+                <a href="services.html">บริการ</a>
+                <a href="about.html" class="active">เกี่ยวกับเรา</a>
+                <a href="contact.html">ติดต่อเรา</a>
+            </nav>
+            <div class="header-actions">
+                <a href="tel:02-123-4567" class="btn btn-outline"><i class="fas fa-phone"></i> 02-123-4567</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="about-hero">
+        <div class="container">
+            <h1 class="mb-2" style="font-size:3rem; color: white;">130 Years of Excellence</h1>
+            <p style="font-size:1.2rem; color:rgba(255,255,255,0.8);">ผู้นำด้านนวัตกรรมการวัดและทดสอบไฟฟ้าที่โลกไว้วางใจ
+            </p>
+        </div>
+    </section>
+
+    <!-- Vision -->
+    <section class="section-padding" style="background: #f8f9fa;">
+        <div class="container">
+            <h2 class="text-center mb-4">Our Vision & Mission</h2>
+            <div class="d-flex gap-md" style="flex-wrap: wrap;">
+                <div class="card text-center" style="padding: 2rem; flex: 1; min-width: 250px;">
+                    <i class="fas fa-certificate fa-3x mb-3" style="color:var(--primary-color);"></i>
+                    <h3>Quality</h3>
+                    <p>ส่งมอบเครื่องมือวัดที่มีความแม่นยำและทนทานสูงสุด</p>
+                </div>
+                <div class="card text-center" style="padding: 2rem; flex: 1; min-width: 250px;">
+                    <i class="fas fa-globe-asia fa-3x mb-3" style="color:var(--primary-color);"></i>
+                    <h3>Innovation</h3>
+                    <p>พัฒนานวัตกรรมอย่างต่อเนื่องเพื่อตอบโจทย์อุตสาหกรรมยุคใหม่</p>
+                </div>
+                <div class="card text-center" style="padding: 2rem; flex: 1; min-width: 250px;">
+                    <i class="fas fa-users fa-3x mb-3" style="color:var(--primary-color);"></i>
+                    <h3>Service</h3>
+                    <p>บริการหลังการขายที่รวดเร็วและเป็นมืออาชีพ</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- History -->
+    <section class="container section-padding">
+        <h2 class="text-center mb-4">เส้นทางความสำเร็จ</h2>
+
+        <div class="d-flex gap-md mb-4 align-center">
+            <div class="year-badge">1889</div>
+            <div>
+                <h3 class="mb-1">The Beginning</h3>
+                <p>Sydney Evershed จดสิทธิบัตรเครื่องทดสอบฉนวนไฟฟ้าเครื่องแรกของโลก ในชื่อ "Megger"</p>
+            </div>
+        </div>
+
+        <div class="d-flex gap-md mb-4 align-center">
+            <div class="year-badge">1960</div>
+            <div>
+                <h3 class="mb-1">Global Expansion</h3>
+                <p>ขยายฐานการผลิตและจำหน่ายไปยังสหรัฐอเมริกา และยุโรป</p>
+            </div>
+        </div>
+
+        <div class="d-flex gap-md align-center">
+            <div class="year-badge">2024</div>
+            <div>
+                <h3 class="mb-1">Megger Thailand</h3>
+                <p>เปิดตัวศูนย์บริการครบวงจรในประเทศไทย เพื่อรองรับอุตสาหกรรม 4.0</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h4>Megger Thailand</h4>
+                <p style="color:rgba(255,255,255,0.7)">ผู้นำด้านเครื่องมือวัดและทดสอบไฟฟ้าแรงสูงครบวงจร</p>
+            </div>
+            <div class="footer-col">
+                <h4>เมนูลัด</h4>
+                <ul>
+                    <li><a href="about.html">เกี่ยวกับเรา</a></li>
+                    <li><a href="contact.html">ติดต่อเรา</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>บริการลูกค้า</h4>
+                <ul>
+                    <li><a href="#">แจ้งซ่อมสินค้า</a></li>
+                    <li><a href="#">ติดต่อเรา</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>ติดต่อสอบถาม</h4>
+                <p style="color:#999; font-size:0.9rem;">
+                    <i class="fas fa-map-marker-alt"></i> 123 อาคารตัวอย่าง กรุงเทพฯ<br>
+                    <i class="fas fa-phone"></i> 02-123-4567<br>
+                    <i class="fas fa-envelope"></i> sales@megger.co.th
+                </p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

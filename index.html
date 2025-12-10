@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Megger Thailand - High Voltage Testing Expert</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo">
+                <i class="fas fa-bolt" style="color:var(--primary-color)"></i> MEGGER <span>THAILAND</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html" class="active">หน้าแรก</a>
+                <a href="products.html">สินค้า</a>
+                <a href="services.html">บริการ</a>
+                <a href="about.html">เกี่ยวกับเรา</a>
+                <a href="contact.html">ติดต่อเรา</a>
+            </nav>
+            <div class="header-actions">
+                <a href="tel:02-123-4567" class="btn btn-outline"><i class="fas fa-phone"></i> 02-123-4567</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="container hero-content">
+            <span class="hero-tag">
+                PREMIUM B2B SOLUTIONS
+            </span>
+            <h1 class="hero-title">
+                Expert High Voltage <br>Testing Equipment
+            </h1>
+            <p class="hero-desc">
+                มั่นใจในทุกการทดสอบด้วยเครื่องมือมาตรฐานระดับโลก จากผู้เชี่ยวชาญตัวจริงที่คุณวางใจได้
+            </p>
+            <div class="d-flex gap-sm justify-center">
+                <a href="products.html" class="btn btn-primary"
+                    style="padding: 1rem 2.5rem; font-size:1.1rem;">ดูสินค้าทั้งหมด</a>
+                <a href="services.html" class="btn btn-ghost">บริการของเรา</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4 Service Pillars -->
+    <section class="container">
+        <div class="service-pillars">
+            <div class="pillars-grid">
+                <div class="pillar-card">
+                    <div class="pillar-icon"><i class="fas fa-shopping-cart"></i></div>
+                    <h3>Sales</h3>
+                    <p>ตัวแทนจำหน่ายอย่างเป็นทางการ มั่นใจได้ของแท้ 100%</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-icon"><i class="fas fa-tools"></i></div>
+                    <h3>Repair Center</h3>
+                    <p>ศูนย์ซ่อมมาตรฐานสากล โดยวิศวกรที่ผ่านการรับรอง</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-icon"><i class="fas fa-microscope"></i></div>
+                    <h3>Calibration</h3>
+                    <p>บริการสอบเทียบเครื่องมือวัด ออกใบรับรอง ISO 17025</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-icon"><i class="fas fa-clock"></i></div>
+                    <h3>Rental</h3>
+                    <p>บริการให้เช่าเครื่องมือวัด สำหรับงานด่วนหรืองานระยะสั้น</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="container section-padding">
+        <div class="section-header">
+            <h2>สินค้าแนะนำ</h2>
+            <p>เครื่องมือวัดและทดสอบที่ได้รับความนิยมสูงสุดในกลุ่มอุตสาหกรรม</p>
+        </div>
+        <script src="scripts/main.js"></script>
+        <script src="scripts/store.js"></script>
+        <script>
+            // Render Featured Products from LocalStorage
+            document.addEventListener('DOMContentLoaded', () => {
+                const grid = document.querySelector('.product-grid');
+                const products = window.MeggerStore.getAll();
+
+                // Get first 4 items for "Featured"
+                const featuredProducts = products.slice(0, 4);
+
+                grid.innerHTML = '';
+
+                if (featuredProducts.length === 0) {
+                    grid.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 2rem;">
+                         <p style="color:#999">ยังไม่มีสินค้าแนะนำ</p>
+                    </div>
+                `;
+                    return;
+                }
+
+                featuredProducts.forEach(p => {
+                    let imgMarkup = '';
+                    if (p.image && (p.image.startsWith('http') || p.image.startsWith('data:'))) {
+                        imgMarkup = `<img src="${p.image}" alt="${p.name}">`;
+                    } else {
+                        imgMarkup = `<i class="fas fa-bolt fa-4x" style="color:#ddd"></i>`;
+                    }
+
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+                    card.innerHTML = `
+                    <div class="product-img">
+                        ${imgMarkup}
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">${p.category}</div>
+                        <h3 class="product-title" style="height:2.4em; overflow:hidden;">${p.name}</h3>
+                        <a href="product-detail.html?id=${p.id}" class="btn btn-outline w-100">ดูรายละเอียด</a>
+                    </div>
+                `;
+                    grid.appendChild(card);
+                });
+            });
+        </script>
+</body>
+
+</html>

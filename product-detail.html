@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Megger Thailand</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .product-detail-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            padding: 4rem 0;
+            align-items: start;
+        }
+
+        .product-gallery {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .product-main-content h1 {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .product-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .key-features {
+            margin-bottom: 2rem;
+        }
+
+        .key-features li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .key-features li i {
+            color: var(--primary-color);
+        }
+
+        .cta-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .tech-tabs {
+            margin-top: 4rem;
+        }
+
+        .tab-headers {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 2rem;
+        }
+
+        .tab-btn {
+            padding: 1rem 2rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-weight: 600;
+        }
+
+        .tab-btn.active {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header (Same as Index) -->
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo">
+                <i class="fas fa-bolt" style="color:red"></i> MEGGER <span>THAILAND</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html">หน้าแรก</a>
+                <a href="products.html" class="active">สินค้า</a>
+                <a href="services.html">บริการ</a>
+                <a href="about.html">เกี่ยวกับเรา</a>
+                <a href="contact.html">ติดต่อเรา</a>
+            </nav>
+            <div class="header-actions">
+                <a href="tel:02-123-4567" class="btn btn-outline"><i class="fas fa-phone"></i> 02-123-4567</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dynamic Product Detail -->
+    <section class="container product-detail-layout" id="productContainer">
+        <div style="grid-column: 1/-1; text-align: center; padding:4rem;">
+            <i class="fas fa-spinner fa-spin fa-3x" style="color:var(--secondary-color)"></i>
+        </div>
+    </section>
+
+    <!-- Tech Tabs (Dynamic or Static Template) -->
+    <section class="container tech-tabs" id="techSpecs" style="display:none;">
+        <div class="tab-headers">
+            <div class="tab-btn active">ข้อมูลทั่วไป</div>
+            <div class="tab-btn">อุปกรณ์ในกล่อง</div>
+        </div>
+        <div class="tab-content" style="padding: 2rem 0; color:#444;">
+            <h3>Overview</h3>
+            <p id="productDesc" style="line-height:1.8; white-space: pre-wrap;"></p>
+        </div>
+    </section>
+
+    <!-- Quote Modal -->
+    <div id="quoteModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('quoteModal')">&times;</span>
+            <h2 style="margin-bottom:1.5rem;">ขอใบเสนอราคา</h2>
+            <form
+                onsubmit="event.preventDefault(); alert('ส่งคำขอราคาเรียบร้อย! เจ้าหน้าที่จะติดต่อกลับ'); closeModal('quoteModal');">
+                <div class="form-group">
+                    <label>ชื่อสินค้า</label>
+                    <input type="text" id="quoteProductName" readonly style="background:#f5f5f5;">
+                </div>
+                <div class="form-group">
+                    <label>ชื่อ-นามสกุล</label>
+                    <input type="text" placeholder="กรอกชื่อของคุณ" required>
+                </div>
+                <div class="form-group">
+                    <label>บริษัท</label>
+                    <input type="text" placeholder="ชื่อบริษัท/หน่วยงาน">
+                </div>
+                <div class="form-group">
+                    <label>เบอร์โทรศัพท์</label>
+                    <input type="tel" placeholder="0xx-xxx-xxxx" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%">ส่งคำขอ</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h4>Megger Thailand</h4>
+                <p style="color:#999; font-size:0.9rem;">ผู้นำด้านเครื่องมือวัดและทดสอบไฟฟ้าแรงสูงครบวงจร</p>
+            </div>
+            <div class="footer-col">
+                <h4>สินค้า</h4>
+                <ul>
+                    <li><a href="#">Cable Fault Locators</a></li>
+                    <li><a href="#">Circuit Breaker Test</a></li>
+                    <li><a href="#">Insulation Testers</a></li>
+                    <li><a href="#">Low Resistance Ohmmeters</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>บริการลูกค้า</h4>
+                <ul>
+                    <li><a href="#">แจ้งซ่อมสินค้า</a></li>
+                    <li><a href="#">ดาวน์โหลด Software</a></li>
+                    <li><a href="#">ตารางอบรมสัมมนา</a></li>
+                    <li><a href="#">ติดต่อเรา</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>ติดต่อสอบถาม</h4>
+                <p style="color:#999; font-size:0.9rem;">
+                    <i class="fas fa-map-marker-alt"></i> 123 อาคารตัวอย่าง กรุงเทพฯ<br>
+                    <i class="fas fa-phone"></i> 02-123-4567<br>
+                    <i class="fas fa-envelope"></i> sales@megger.co.th
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+    <script src="scripts/store.js"></script>
+    <script>
+        // CLIENT_SIDE LOGIC (No Server Required)
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+
+            const container = document.getElementById('productContainer');
+            const techSection = document.getElementById('techSpecs');
+
+            if (!id) {
+                container.innerHTML = '<div style="grid-column:1/-1; text-align:center;"><h3>ไม่พบสินค้า</h3><a href="products.html" class="btn btn-outline">กลับหน้ารวมสินค้า</a></div>';
+                return;
+            }
+
+            const product = window.MeggerStore.getById(id);
+
+            if (!product) {
+                container.innerHTML = '<div style="grid-column:1/-1; text-align:center;"><h3>ไม่พบสินค้า ID นี้</h3><a href="products.html" class="btn btn-outline">กลับหน้ารวมสินค้า</a></div>';
+                return;
+            }
+
+            // Render Product
+            let imgMarkup = '';
+            if (product.image && (product.image.startsWith('http') || product.image.startsWith('data:'))) {
+                imgMarkup = `<img src="${product.image}" style="max-height:100%; max-width:100%; object-fit:contain;">`;
+            } else {
+                imgMarkup = `<i class="fas fa-bolt fa-10x" style="color:#ddd"></i>`;
+            }
+
+            const hasDatasheet = !!(product.datasheet && product.datasheet.length > 0);
+
+            container.innerHTML = `
+                <div class="product-gallery">
+                        <div style="height:400px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+                        ${imgMarkup}
+                        </div>
+                </div>
+                <div class="product-main-content">
+                    <h1>${product.name}</h1>
+                    <p class="product-subtitle">${product.category}</p>
+                    
+                    <div style="margin-bottom:2rem; line-height:1.6;">
+                        ${product.description ? product.description.replace(/\n/g, '<br>') : ''}
+                    </div>
+
+                    <ul class="key-features">
+                        <li><i class="fas fa-check-circle"></i> High Accuracy & Reliability</li>
+                        <li><i class="fas fa-check-circle"></i> Rugged Design for Field Use</li>
+                        <li><i class="fas fa-check-circle"></i> International Safety Standards</li>
+                    </ul>
+
+                    <div class="cta-actions">
+                        <button onclick="openModal('quoteModal')" class="btn btn-primary" style="flex:1;">
+                            <i class="fas fa-file-invoice-dollar"></i> ขอใบเสนอราคา
+                        </button>
+                        <a href="https://line.me/ti/p/~meggerth" target="_blank" class="btn btn-outline" style="flex:1; justify-content:center;">
+                            <i class="fab fa-line"></i> ปรึกษาผู้เชี่ยวชาญ
+                        </a>
+                    </div>
+                    
+                    ${hasDatasheet ? `
+                        <p style="font-size:0.9rem; margin-top:1.5rem;">
+                            <!-- Mock Download Interaction -->
+                            <a href="#" onclick="alert('Downloading: ${product.datasheet}'); return false;" class="btn-text" style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem; font-weight:600;">
+                                <i class="fas fa-file-pdf fa-lg"></i> ดาวน์โหลด Datasheet (PDF)
+                            </a>
+                        </p>
+                    ` : ''}
+                </div>
+            `;
+
+            // Update Tech Specs Description
+            document.getElementById('productDesc').innerText = product.description || '';
+            if (document.getElementById('quoteProductName')) {
+                document.getElementById('quoteProductName').value = product.name;
+            }
+            techSection.style.display = 'block';
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Megger Thailand</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo">
+                <!-- Using inline style for Megger Red -->
+                <i class="fas fa-bolt" style="color:red"></i> MEGGER <span>THAILAND</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html">หน้าแรก</a>
+                <a href="products.html" class="active">สินค้า</a>
+                <a href="services.html">บริการ</a>
+                <a href="about.html">เกี่ยวกับเรา</a>
+                <a href="contact.html">ติดต่อเรา</a>
+            </nav>
+            <div class="header-actions">
+                <a href="tel:02-123-4567" class="btn btn-outline"><i class="fas fa-phone"></i> 02-123-4567</a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <div class="menu-toggle" style="display:none; color:white; font-size:1.5rem; cursor:pointer;">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header"
+        style="background: var(--secondary-color); padding: 4rem 0; color: white; text-align: center;">
+        <div class="container">
+            <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">สินค้าทั้งหมด</h1>
+            <p style="color: #ccc;">เทคโนโลยีการตรวจสอบและวัดค่าไฟฟ้าแรงสูงระดับโลก</p>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="container" style="padding: 4rem 0;">
+
+        <!-- Filter Controls (Visual Only) -->
+        <div class="filter-controls" style="text-align:center; margin-bottom:3rem;">
+            <button class="btn btn-outline active">ทั้งหมด</button>
+            <button class="btn btn-outline" style="border-color:#ddd; color:#666;">Insulation Testing</button>
+            <button class="btn btn-outline" style="border-color:#ddd; color:#666;">Cable Fault</button>
+            <button class="btn btn-outline" style="border-color:#ddd; color:#666;">Resistance</button>
+        </div>
+
+        <div class="product-grid" id="productGrid">
+            <!-- Skeleton Loader -->
+            <div class="product-card skeleton" style="height:400px; background:#f0f0f0;"></div>
+            <div class="product-card skeleton" style="height:400px; background:#f0f0f0;"></div>
+            <div class="product-card skeleton" style="height:400px; background:#f0f0f0;"></div>
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h4>Megger Thailand</h4>
+                <p style="color:#999; font-size:0.9rem;">ผู้นำด้านเครื่องมือวัดและทดสอบไฟฟ้าแรงสูงครบวงจร</p>
+            </div>
+            <div class="footer-col">
+                <h4>สินค้า</h4>
+                <ul>
+                    <li><a href="#">Cable Fault Locators</a></li>
+                    <li><a href="#">Circuit Breaker Test</a></li>
+                    <li><a href="#">Insulation Testers</a></li>
+                    <li><a href="#">Low Resistance Ohmmeters</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>บริการลูกค้า</h4>
+                <ul>
+                    <li><a href="#">แจ้งซ่อมสินค้า</a></li>
+                    <li><a href="#">ดาวน์โหลด Software</a></li>
+                    <li><a href="#">ตารางอบรมสัมมนา</a></li>
+                    <li><a href="#">ติดต่อเรา</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>ติดต่อสอบถาม</h4>
+                <p style="color:#999; font-size:0.9rem;">
+                    <i class="fas fa-map-marker-alt"></i> 123 อาคารตัวอย่าง กรุงเทพฯ<br>
+                    <i class="fas fa-phone"></i> 02-123-4567<br>
+                    <i class="fas fa-envelope"></i> sales@megger.co.th
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+    <script src="scripts/store.js"></script>
+    <script>
+        // CLIENT-SIDE LOGIC (No Server Required)
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('productGrid');
+
+            // Artificial delay to show skeleton
+            setTimeout(() => {
+                const products = window.MeggerStore.getAll();
+                grid.innerHTML = '';
+
+                if (products.length === 0) {
+                    grid.innerHTML = `
+                        <div style="grid-column: 1/-1; text-align: center; padding: 4rem;">
+                            <i class="fas fa-box-open fa-3x" style="color:#ddd; margin-bottom:1rem;"></i>
+                            <h3 style="color:#666;">ยังไม่มีสินค้าในระบบ</h3>
+                            <a href="admin.html" class="btn btn-outline" style="margin-top:1rem;">ไปที่หน้า Admin เพื่อเพิ่มสินค้า</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                products.forEach(p => {
+
+                    let imgMarkup = '';
+                    if (p.image && (p.image.startsWith('http') || p.image.startsWith('data:'))) {
+                        imgMarkup = `<img src="${p.image}" alt="${p.name}">`;
+                    } else {
+                        imgMarkup = `<i class="fas fa-bolt fa-4x" style="color:#ddd"></i>`;
+                    }
+
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+                    card.innerHTML = `
+                        <div class="product-img">
+                             ${imgMarkup}
+                        </div>
+                        <div class="product-info" style="padding: 1.5rem;">
+                            <div class="product-category" style="color:var(--primary-color); font-size:0.8rem; font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:0.5rem;">
+                                ${p.category}
+                            </div>
+                            <h3 class="product-title" style="font-size:1.1rem; margin-bottom:1.5rem; height:2.4em; overflow:hidden;">
+                                ${p.name}
+                            </h3>
+                            <a href="product-detail.html?id=${p.id}" class="btn btn-outline" style="width:100%; justify-content:center;">
+                                ดูรายละเอียด
+                            </a>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            }, 500);
+        });
+    </script>
+</body>
+
+</html>
